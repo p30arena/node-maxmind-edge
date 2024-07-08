@@ -1,4 +1,4 @@
-import assert from 'assert';
+// import assert from 'assert';
 import { Reader, Response } from 'mmdb-lib';
 import { lru } from 'tiny-lru';
 import fs from './fs';
@@ -22,7 +22,7 @@ export const open = async <T extends Response>(
   opts?: OpenOpts,
   cb?: Callback
 ): Promise<Reader<T>> => {
-  assert(!cb, utils.legacyErrorMessage);
+  // assert(!cb, utils.legacyErrorMessage);
 
   const database = await fs.readFile(filepath);
 
