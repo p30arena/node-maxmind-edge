@@ -3,7 +3,7 @@ import { Reader, Response } from 'mmdb-lib';
 import { lru } from 'tiny-lru';
 import fs from './fs';
 import ip from './ip';
-import isGzip from './is-gzip';
+// import isGzip from './is-gzip';
 import utils from './utils';
 
 type Callback = () => void;
