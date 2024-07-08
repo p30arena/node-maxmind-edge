@@ -26,11 +26,11 @@ export const open = async <T extends Response>(
 
   const database = await fs.readFile(filepath);
 
-  if (isGzip(database)) {
-    throw new Error(
-      'Looks like you are passing in a file in gzip format, please use mmdb database instead.'
-    );
-  }
+  // if (isGzip(database)) {
+  //   throw new Error(
+  //     'Looks like you are passing in a file in gzip format, please use mmdb database instead.'
+  //   );
+  // }
 
   const cache = lru(opts?.cache?.max || 10_000);
   const reader = new Reader<T>(database, { cache });
@@ -46,30 +46,30 @@ export const open = async <T extends Response>(
       persistent: opts.watchForUpdatesNonPersistent !== true,
     };
 
-    fs.watchFile(filepath, watcherOptions, async () => {
-      // When database file is being replaced,
-      // it could be removed for a fraction of a second.
-      const waitExists = async () => {
-        for (let i = 0; i < 3; i++) {
-          if (fs.existsSync(filepath)) {
-            return true;
-          }
+    // fs.watchFile(filepath, watcherOptions, async () => {
+    //   // When database file is being replaced,
+    //   // it could be removed for a fraction of a second.
+    //   const waitExists = async () => {
+    //     for (let i = 0; i < 3; i++) {
+    //       if (fs.existsSync(filepath)) {
+    //         return true;
+    //       }
 
-          await new Promise((a) => setTimeout(a, 500));
-        }
+    //       await new Promise((a) => setTimeout(a, 500));
+    //     }
 
-        return false;
-      };
-      if (!(await waitExists())) {
-        return;
-      }
-      const updatedDatabase = await fs.readFile(filepath);
-      cache.clear();
-      reader.load(updatedDatabase);
-      if (opts.watchForUpdatesHook) {
-        opts.watchForUpdatesHook();
-      }
-    });
+    //     return false;
+    //   };
+    //   if (!(await waitExists())) {
+    //     return;
+    //   }
+    //   const updatedDatabase = await fs.readFile(filepath);
+    //   cache.clear();
+    //   reader.load(updatedDatabase);
+    //   if (opts.watchForUpdatesHook) {
+    //     opts.watchForUpdatesHook();
+    //   }
+    // });
   }
 
   return reader;
