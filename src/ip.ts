@@ -1,4 +1,4 @@
-import net from 'net';
+//import net from 'net';
 
 const parseIPv4 = (input: string): number[] => {
   const ip = input.split('.', 4);
@@ -69,7 +69,7 @@ const bitAt = (rawAddress: Buffer | number[], idx: number): number => {
 };
 
 const validate = (ip: string): boolean => {
-  const version = net.isIP(ip);
+  const version = ip.indexOf(':') == -1 ? 4 : 6;//net.isIP(ip);
   return version === 4 || version === 6;
 };
 
