@@ -65,7 +65,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "rimraf lib/* && tsc",
+    "build": "rimraf lib && tsc",
     "format": "prettier --write .",
     "prepublish": "npm run build",
     "semantic-release": "semantic-release",
