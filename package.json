@@ -27,7 +27,7 @@
   ],
   "dependencies": {
     "buffer": "^6.0.3",
-    "mmdb-lib": "2.1.1",
+    "mmdb-lib": "https://github.com/p30arena/mmdb-lib.git",
     "tiny-lru": "11.2.6"
   },
   "devDependencies": {
